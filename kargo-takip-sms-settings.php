@@ -22,7 +22,7 @@ function kargoTR_sms_setting_page(){
 
     ?>
     <div class="wrap">
-        <h1>Kargo Takip Türkiye</h1>
+        <h1>Shipment Tracking</h1>
 
         <form method="post" action="options.php">
             <?php settings_fields( 'kargoTR-settings-group' ); ?>
