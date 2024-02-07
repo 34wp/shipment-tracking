@@ -3,8 +3,8 @@
  * Plugin Name: Shipment Tracking
  * Description: Bu eklenti sayesinde basit olarak müşterilerinize Shipment Tracking linkini ulaştırabilirsiniz. Mail ve SMS gönderebilirsiniz.
  * Version: 0.2.0
- * Author: Unbelievable.Digital
- * Author URI: https://unbelievable.digital
+ * Author: 34WP
+ * Author URI: https://34wp.com
  */
 
 
