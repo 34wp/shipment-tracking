@@ -49,7 +49,7 @@ function kargoTR_SMS_gonder_netgsm($order_id) {
     $tracking_company = get_post_meta($order_id, 'tracking_company', true);
     $tracking_code = get_post_meta($order_id, 'tracking_code', true);
 
-    $message = "Siparişinizin kargo takip numarası : " . $tracking_code . ", " . kargoTR_get_company_name($tracking_company) . " kargo firması ile takip edebilirsiniz.";
+    $message = "Siparişinizin Shipment Tracking numarası : " . $tracking_code . ", " . kargoTR_get_company_name($tracking_company) . " kargo firması ile takip edebilirsiniz.";
     $message = urlencode($message);
 
     if ($NetGsm_sms_url_send == 'yes') {

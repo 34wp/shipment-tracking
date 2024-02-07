@@ -31,7 +31,7 @@ do_action('woocommerce_email_header', $email_heading, $email);
 <p> Kargo Firması Adı: <strong> <?php
     echo esc_attr(kargoTR_get_company_name($tracking_company));
 ?></strong></p>
-<p> Kargo Takip No:<strong><?php echo esc_attr($tracking_code); ?></strong></p>
+<p> Shipment Tracking No:<strong><?php echo esc_attr($tracking_code); ?></strong></p>
 <?php
     $cargoTrackingUrl = kargoTR_getCargoTrack($tracking_company, $tracking_code);
     echo '<a href="'.esc_attr($cargoTrackingUrl).'" target="_blank" rel="noopener noreferrer">';

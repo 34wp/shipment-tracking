@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Shipment Tracking
- * Description: Bu eklenti sayesinde basit olarak müşterilerinize kargo takip linkini ulaştırabilirsiniz. Mail ve SMS gönderebilirsiniz.
+ * Description: Bu eklenti sayesinde basit olarak müşterilerinize Shipment Tracking linkini ulaştırabilirsiniz. Mail ve SMS gönderebilirsiniz.
  * Version: 0.2.0
  * Author: Unbelievable.Digital
  * Author URI: https://unbelievable.digital
@@ -20,7 +20,7 @@ add_action( 'admin_menu', 'kargoTR_register_admin_menu' );
 function kargoTR_register_admin_menu() {
     $menu_slug = 'kargo-takip-turkiye';
     // add_menu_page( $page_title, $menu_title, $capability, $menu_slug, $function, $icon_url, $position );
-    add_menu_page( 'Shipment Tracking', 'Kargo Takip', 'read', $menu_slug, false, 'dashicons-car', 20 );
+    add_menu_page( 'Shipment Tracking', 'Shipment Tracking', 'read', $menu_slug, false, 'dashicons-car', 20 );
     add_submenu_page( $menu_slug, 'Shipment Tracking Ayarlar', 'Genel Ayarlar', 'read', $menu_slug, 'kargoTR_setting_page' );
     add_submenu_page( $menu_slug, 'Shipment Tracking Ayarlar', 'E-Mail Ayarlari', 'read', 'kargo-takip-turkiye-email-settings', 'kargoTR_email_setting_page' );
     add_submenu_page( $menu_slug, 'Shipment Tracking Ayarlar', 'SMS Ayarlari', 'read', 'kargo-takip-turkiye-sms-settings', 'kargoTR_sms_setting_page' );
@@ -41,7 +41,7 @@ function kargoTR_register_settings() {
     );
 
     $argsSmsTemplate = array(
-        'default' => 'Merhaba {customer_name} , {order_id} nolu siparişiniz kargoya verildi. Kargo takip numaranız : {tracking_number} .Kargo takip linkiniz : {tracking_url} ,İyi günler dileriz.',
+        'default' => 'Merhaba {customer_name} , {order_id} nolu siparişiniz kargoya verildi. Shipment Tracking numaranız : {tracking_number} .Shipment Tracking linkiniz : {tracking_url} ,İyi günler dileriz.',
     );
 
 
@@ -213,7 +213,7 @@ function kargoTR_setting_page() {
 
                 <tr valign="top">
                     <th scope="row" style="width:50%">
-                        <?php _e( 'Kargo takip URL de gönderilsin mi ? <br> Eğer bu özelliği açarsanız sms boyutunuz muhtemelen daha büyük olacak ve ekstradan kredi harçayacaktır paketinizden.', 'kargoTR' ) ?>
+                        <?php _e( 'Shipment Tracking URL de gönderilsin mi ? <br> Eğer bu özelliği açarsanız sms boyutunuz muhtemelen daha büyük olacak ve ekstradan kredi harçayacaktır paketinizden.', 'kargoTR' ) ?>
                     </th>
                     <td>
                         <input type="radio" id="yes_url_send" <?php if( $NetGsm_sms_url_send == 'yes' ) echo 'checked'?>
@@ -304,7 +304,7 @@ function kargoTR_general_shipment_details_for_admin($order) {
     woocommerce_wp_text_input(array(
         'id' => 'tracking_code',
         'label' => 'Takip Numarası:',
-        'description' => 'Lütfen kargo takip numarasını giriniz.',
+        'description' => 'Lütfen Shipment Tracking numarasını giriniz.',
         'desc_tip' => true,
         'value' => $tracking_code,
         'wrapper_class' => 'form-field-wide shipment-set-tip-style',
@@ -329,7 +329,7 @@ function kargoTR_tracking_save_general_details($ord_id) {
     } elseif (($tracking_company == $_POST['tracking_company']) && ($tracking_code != $_POST['tracking_code'])) {
         update_post_meta($ord_id, 'tracking_code', wc_sanitize_textarea($_POST['tracking_code']));
 
-        $note = __("Kargo takip kodu güncellendi.");
+        $note = __("Shipment Tracking kodu güncellendi.");
 
         $order_note->add_order_note($note);
     } elseif (($tracking_company == $_POST['tracking_company']) && ($tracking_code == $_POST['tracking_code'])) {
@@ -376,9 +376,9 @@ function kargoTR_shipment_details($order) {
         else {
             ?>
 <div class="shipment-order-page">
-    <h2 id="kargoTakipSection">Kargo Takip</h2>
+    <h2 id="kargoTakipSection">Shipment Tracking</h2>
     <h4>Kargo firması : </h4> <?php echo kargoTR_get_company_name($tracking_company); ?>
-    <h4><?php _e( 'Kargo takip numarası:','kargoTR');?></h4> <?php echo esc_attr($tracking_code) ?>
+    <h4><?php _e( 'Shipment Tracking numarası:','kargoTR');?></h4> <?php echo esc_attr($tracking_code) ?>
     <br>
     <?php echo '<a href="' . kargoTR_getCargoTrack($tracking_company, $tracking_code) . '"target="_blank" rel="noopener noreferrer">'; _e( 'Kargonuzu takibi için buraya tıklayın.','kargoTR' );  echo '</a>'; ?>
 </div>
@@ -440,7 +440,7 @@ function kargoTR_kargo_eposta_details($order_id) {
 
     $mailer->send($mailTo, $subject, $details, $mailHeaders);
 
-    $note = __("Müşterinin " . $order->get_billing_email() . " e-postasına kargo takip bilgileri gönderilmiştir.");
+    $note = __("Müşterinin " . $order->get_billing_email() . " e-postasına Shipment Tracking bilgileri gönderilmiştir.");
     $order->add_order_note($note);
 
     // Siparişi güncelle

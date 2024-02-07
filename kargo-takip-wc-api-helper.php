@@ -79,7 +79,7 @@ function kargoTR_api_add_tracking_code() {
 
         $order_note->add_order_note(
             sprintf(
-                __('Kargo takip numarası güncellendi. Kargo şirketi: %s, Takip numarası: %s', 'woocommerce'),
+                __('Shipment Tracking numarası güncellendi. Kargo şirketi: %s, Takip numarası: %s', 'woocommerce'),
                 $shipment_company,
                 $tracking_code
             )
@@ -88,7 +88,7 @@ function kargoTR_api_add_tracking_code() {
     //Return update message 
         return array(
             'status' => 'success',
-            'message' => 'Kargo takip numarası güncellendi.'
+            'message' => 'Shipment Tracking numarası güncellendi.'
         );
 
     } else {
@@ -98,7 +98,7 @@ function kargoTR_api_add_tracking_code() {
 
         $order_note->add_order_note(
             sprintf(
-                __('Kargo takip numarası eklendi. Kargo şirketi: %s, Takip numarası: %s', 'woocommerce'),
+                __('Shipment Tracking numarası eklendi. Kargo şirketi: %s, Takip numarası: %s', 'woocommerce'),
                 $shipment_company,
                 $tracking_code
             )
@@ -113,7 +113,7 @@ function kargoTR_api_add_tracking_code() {
         //return success message
         return array(
             'status' => 'success',
-            'message' => 'Kargo takip numarası eklendi.'
+            'message' => 'Shipment Tracking numarası eklendi.'
         );
 
 

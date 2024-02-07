@@ -200,16 +200,16 @@ function kargoTR_sms_setting_page(){
                         Merhaba {customer_name}  <br>
                         {order_id} nolu siparişiniz kargoya verildi. <br>
                         Kargo şirketiniz : {company_name} <br>
-                        Kargo takip numaranız : {tracking_number} <br>
-                        Kargo takip linkiniz : {tracking_url} <br>
+                        Shipment Tracking numaranız : {tracking_number} <br>
+                        Shipment Tracking linkiniz : {tracking_url} <br>
                         İyi günler dileriz.<br>
                         <br>
                         <b>Not : </b> <br>
                         <b>{customer_name} : Müşteri adı</b> <br>
                         <b>{order_id} : Sipariş numarası</b> <br>
                         <b>{company_name} : Kargo Şirket adı</b> <br>
-                        <b>{tracking_number} : Kargo takip numarası</b> <br>
-                        <b>{tracking_url} : Kargo takip linki</b> <br>
+                        <b>{tracking_number} : Shipment Tracking numarası</b> <br>
+                        <b>{tracking_url} : Shipment Tracking linki</b> <br>
                     </td>
                     <td colspan="2">
 
