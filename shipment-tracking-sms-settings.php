@@ -68,14 +68,12 @@ function kargoTR_sms_setting_page(){
                         <?php _e( 'NetGSM Bilgileriniz <br> Abone numarasının başında 0 olmadan giriniz orneğin 212xxxxxx <br> Şifrenizide girdikten sonra kaydedin eğer şifre ve abone numaranız dogruysa <br> Sms baslıklarınız çıkacaktır <br> Lütfen başlık seçip kaydedin tekrardan', 'kargoTR' ) ?>
                     </th>
                     <td>
-                        <label for="NetGsm_UserName" class="label-bold">Abone Numarası </label> <br>
-                        <input type="text" id="NetGsm_UserName" name="NetGsm_UserName"
-                            value="<?php echo esc_attr($NetGsm_UserName); ?>">
+                        <label for="NetGsm_UserName" class="label-bold">Abone Numarası</label> <br>
+                        <input type="text" id="NetGsm_UserName" name="NetGsm_UserName" value="<?php echo esc_attr($NetGsm_UserName); ?>" required>
                     </td>
                     <td>
                         <label for="NetGSM" class="label-bold">NetGSM Şifresi</label> <br>
-                        <input type="password" id="NetGSM" name="NetGsm_Password"
-                            value="<?php echo __($NetGsm_Password);?>">
+                        <input type="password" id="NetGSM" name="NetGsm_Password" value="<?php echo __($NetGsm_Password);?>" required>
                         <br>
                     </td>
                 </tr>
@@ -112,7 +110,7 @@ function kargoTR_sms_setting_page(){
                                         echo '<b>Kalan Paketleriniz :</b> <br> '.__($NetGSM_packet_info);
                                     }
                                     if ($NetGSM_credit_info) {
-                                        echo '<b>Kalan Krediniz :</b> <br> '.esc_attr($NetGSM_credit_info) .' TL';
+                                        echo '<br><br><b>Kalan Krediniz :</b> <br> '.esc_attr($NetGSM_credit_info) .' TL';
                                     }
                                 }
                             ?>
