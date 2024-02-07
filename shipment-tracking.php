@@ -20,9 +20,9 @@ function kargoTR_register_admin_menu() {
     $menu_slug = 'shipment-tracking';
     // add_menu_page( $page_title, $menu_title, $capability, $menu_slug, $function, $icon_url, $position );
     add_menu_page( 'Shipment Tracking', 'Shipment Tracking', 'read', $menu_slug, false, 'dashicons-car', 20 );
-    add_submenu_page( $menu_slug, 'Shipment Tracking Ayarlar', 'Genel Ayarlar', 'read', $menu_slug, 'kargoTR_setting_page' );
-    add_submenu_page( $menu_slug, 'Shipment Tracking Ayarlar', 'E-Mail Ayarlari', 'read', 'shipment-tracking-email-settings', 'kargoTR_email_setting_page' );
-    add_submenu_page( $menu_slug, 'Shipment Tracking Ayarlar', 'SMS Ayarlari', 'read', 'shipment-tracking-sms-settings', 'kargoTR_sms_setting_page' );
+    add_submenu_page( $menu_slug, 'Shipment Tracking Settings', 'General Settings', 'read', $menu_slug, 'kargoTR_setting_page' );
+    add_submenu_page( $menu_slug, 'Shipment Tracking Settings', 'Email Settings', 'read', 'shipment-tracking-email-settings', 'kargoTR_email_setting_page' );
+    add_submenu_page( $menu_slug, 'Shipment Tracking Settings', 'SMS Settings', 'read', 'shipment-tracking-sms-settings', 'kargoTR_sms_setting_page' );
     add_action( 'admin_init', 'kargoTR_register_settings' );
 }
 
