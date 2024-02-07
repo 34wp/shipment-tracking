@@ -131,9 +131,9 @@ function kargoTR_setting_page() {
                         <?php _e( 'Otomatik SMS Gönderilsin mi ? Gönderilmesini istiyorsanız firma seçin', 'kargoTR' ) ?>
                     </th>
                     <td>
-                        <input type="radio" id="yokSms" <?php if( $sms_provider == 'no' ) echo 'checked'?>
-                            name="sms_provider" value="no">
-                        <label for="yokSms">Yok</label><br>
+                        <input type="radio" id="none" <?php if( $sms_provider == 'none' ) echo 'checked'?>
+                            name="sms_provider" value="none">
+                        <label for="none">None</label><br>
                     </td>
                     <td>
                         <input type="radio" id="NetGSM" <?php if( $sms_provider == 'NetGSM' ) echo 'checked'?>
@@ -232,7 +232,7 @@ function kargoTR_setting_page() {
             <script>
                 jQuery(document).ready(function ($) {
                     $('input[type=radio][name=sms_provider]').change(function () {
-                        if (this.value == 'no') {
+                        if (this.value == 'none') {
                             $('.netgsm').hide();
 
                         } else if (this.value == 'NetGSM') {
