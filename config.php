@@ -84,7 +84,7 @@ return array(
         ),
         "Sendeo" => array(
             "company" => "Sendeo Kargo",
-            "url" => "https://www.sendeo.com.tr/kargo-takip/",
+            "url" => "https://www.sendeo.com.tr/shipment-tracking/",
             "logo" => "assets/logos/sendeo.png"
         ),
         "carrtell" => array(
