@@ -18,8 +18,6 @@ function kargoTR_sms_setting_page(){
     //get sms template kargoTr_sms_template
     $sms_template = get_option('kargoTr_sms_template');
 
-  
-
     ?>
     <div class="wrap">
         <h1>SMS Settings</h1>
@@ -213,7 +211,7 @@ function kargoTR_sms_setting_page(){
                     </td>
                     <td colspan="2">
 
-                        <textarea type="text" id="sms_template" style="width:100%" name="kargoTr_sms_template"  rows="6" ><?php echo esc_attr($sms_template); ?></textarea>
+                        <textarea type="text" id="sms_template" style="width:100%" name="kargoTr_sms_template" rows="6" placeholder="Dear {customer_name}, your order with {order_id} has been delivered to {company_name}. Your cargo tracking number: {tracking_number}. Your cargo tracking link: {tracking_url}. Good day."><?php echo esc_attr($sms_template); ?></textarea>
 
                     </td>
                      
