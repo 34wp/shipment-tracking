@@ -192,22 +192,12 @@ function kargoTR_sms_setting_page(){
                 <tr valign="top">
                 
                     <td>
-                        <label for="sms_template" class="label-bold">SMS Şablonu</label> <br>
-                        Buradan istediğiniz şekilde sms şablonu oluşturabilirsiniz. <br>
-                        <b>Örnek Şablon</b> : <br>
-                        Merhaba {customer_name}  <br>
-                        {order_id} nolu siparişiniz kargoya verildi. <br>
-                        Kargo şirketiniz : {company_name} <br>
-                        Shipment Tracking numaranız : {tracking_number} <br>
-                        Shipment Tracking linkiniz : {tracking_url} <br>
-                        İyi günler dileriz.<br>
-                        <br>
-                        <b>Not : </b> <br>
-                        <b>{customer_name} : Müşteri adı</b> <br>
-                        <b>{order_id} : Sipariş numarası</b> <br>
-                        <b>{company_name} : Kargo Şirket adı</b> <br>
-                        <b>{tracking_number} : Shipment Tracking numarası</b> <br>
-                        <b>{tracking_url} : Shipment Tracking linki</b> <br>
+                        <h3>Variables</h3>
+                        <b>{customer_name} : Customer name</b> <br>
+                        <b>{order_id} : Order number</b> <br>
+                        <b>{company_name} : Shipping company name</b> <br>
+                        <b>{tracking_number} : Shipment number</b> <br>
+                        <b>{tracking_url} : Shipment tracking link</b> <br>
                     </td>
                     <td colspan="2">
 
