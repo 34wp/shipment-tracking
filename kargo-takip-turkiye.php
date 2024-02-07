@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Shipment Tracking
- * Description: Bu eklenti sayesinde basit olarak müşterilerinize Shipment Tracking linkini ulaştırabilirsiniz. Mail ve SMS gönderebilirsiniz.
+ * Description: Shipment Tracking allows you to easily transmit the tracking codes of your shipments to your customers.
  * Version: 1.0.0
  * Author: 34WP
  * Author URI: https://34wp.com
