@@ -67,14 +67,14 @@ function shipment_tracking_sms_setting_page(){
 
                 <tr valign="top" class="netgsm" <?php if( $sms_provider != 'NetGSM' ) echo 'style="display:none"'?>>
                     <th scope="row" style="width:25%">
-                        <?php _e( 'NetGSM Bilgileriniz <br> Abone numarasının başında 0 olmadan giriniz orneğin 212xxxxxx <br> Şifrenizide girdikten sonra kaydedin eğer şifre ve abone numaranız dogruysa <br> Sms baslıklarınız çıkacaktır <br> Lütfen başlık seçip kaydedin tekrardan', 'kargoTR' ) ?>
+                        <?php _e( 'Your NetGSM Information <br> Enter the subscriber number without a leading 0 (E.g. 212xxxxxx) <br> After entering your password, save it if your password and subscriber number are correct <br> Your SMS titles will appear <br> Please select the title and save again.', 'kargoTR' ) ?>
                     </th>
                     <td>
-                        <label for="NetGsm_UserName" class="label-bold">Abone Numarası</label> <br>
+                        <label for="NetGsm_UserName" class="label-bold">Subscriber No.</label> <br>
                         <input type="text" id="NetGsm_UserName" name="NetGsm_UserName" value="<?php echo esc_attr($NetGsm_UserName); ?>" required>
                     </td>
                     <td>
-                        <label for="NetGSM" class="label-bold">NetGSM Şifresi</label> <br>
+                        <label for="NetGSM" class="label-bold">Password</label> <br>
                         <input type="password" id="NetGSM" name="NetGsm_Password" value="<?php echo __($NetGsm_Password);?>" required>
                         <br>
                     </td>
@@ -83,12 +83,12 @@ function shipment_tracking_sms_setting_page(){
                 <tr valign="top" class="netgsm" <?php if ($sms_provider != 'NetGSM') echo 'style="display:none"'?>>
                     <th scope="row" style="width:25%"></th>
                     <td>
-                        <label for="NetGsm_Header" class="label-bold">SMS Başlığınız </label> <br>
+                        <label for="NetGsm_Header" class="label-bold">Your SMS Title</label> <br>
                         <?php
                                 if ($NetGsm_Password && $NetGsm_UserName) {
                                     $netGsm_Header_get = shipment_tracking_get_netgsm_headers($NetGsm_UserName,$NetGsm_Password);
                                     if (!$netGsm_Header_get) {
-                                        echo 'NetGSM kullanici adi veya sifreniz yanlis';
+                                        echo 'Your NetGSM username or password is incorrect!';
                                     } else {
                                         echo '<select name="NetGsm_Header" id="NetGsm_Header">';
                                         foreach ($netGsm_Header_get as $key => $value) {
@@ -109,10 +109,10 @@ function shipment_tracking_sms_setting_page(){
                                     $NetGSM_packet_info = shipment_tracking_get_netgsm_packet_info($NetGsm_UserName,$NetGsm_Password);
                                     $NetGSM_credit_info = shipment_tracking_get_netgsm_credit_info($NetGsm_UserName,$NetGsm_Password);
                                     if ($NetGSM_packet_info) {
-                                        echo '<b>Kalan Paketleriniz :</b> <br> '.__($NetGSM_packet_info);
+                                        echo '<b>Your Remaining Packages:</b> <br> '.__($NetGSM_packet_info);
                                     }
                                     if ($NetGSM_credit_info) {
-                                        echo '<br><br><b>Kalan Krediniz :</b> <br> '.esc_attr($NetGSM_credit_info) .' TL';
+                                        echo '<br><br><b>Your Remaining Credit:</b> <br> '.esc_attr($NetGSM_credit_info) .' TL';
                                     }
                                 }
                             ?>
@@ -135,10 +135,10 @@ function shipment_tracking_sms_setting_page(){
 
                 <tr valign="top" class="Kobikom" <?php if( $sms_provider != 'Kobikom' ) echo 'style="display:none"'?>>
                     <th scope="row" style="width:25%">
-                        <?php _e( 'Kobikom Bilgileriniz <br> Kobikom API adresinizi girmeniz gerekmektedir.', 'kargoTR' ) ?>
+                        <?php _e( 'Your Kobikom Information <br> You need to enter your Kobikom API address.', 'kargoTR' ) ?>
                     </th>
                     <td>
-                        <label for="Kobikom_ApiKey" class="label-bold">Kobikom API key anahtariniz</label> <br>
+                        <label for="Kobikom_ApiKey" class="label-bold">Your Kobikom API key</label> <br>
                         <textarea type="text" id="Kobikom_ApiKey" name="Kobikom_ApiKey"  rows="6" ><?php echo esc_attr($Kobikom_ApiKey); ?></textarea>
                     </td> 
                 </tr>
@@ -146,13 +146,13 @@ function shipment_tracking_sms_setting_page(){
                 <tr valign="top" class="Kobikom" <?php if ($sms_provider != 'Kobikom') echo 'style="display:none"'?>>
                     <th scope="row" style="width:25%"></th>
                     <td>
-                        <label for="KobiKom_Header" class="label-bold">SMS Başlığınız </label> <br>
+                        <label for="KobiKom_Header" class="label-bold">Your SMS Title</label> <br>
                         <?php
                         
                                 if ($Kobikom_ApiKey) { 
                                     $KobiKom_get_Headers = shipment_tracking_get_kobikom_headers($Kobikom_ApiKey);
                                     if (!$KobiKom_get_Headers) {
-                                        echo 'Kobikom Api Keyiniz yanlis';
+                                        echo 'Your Kobikom API key is incorrect!';
                                     } else {
                                        echo '<select name="Kobikom_Header" id="Kobikom_Header">';
                                         foreach ($KobiKom_get_Headers as $key => $value) {
@@ -173,25 +173,20 @@ function shipment_tracking_sms_setting_page(){
                         <?php
                                 if ($Kobikom_ApiKey){
                                     $KobiKom_get_Credit = shipment_tracking_get_kobikom_balance($Kobikom_ApiKey);
-                                    echo "Kobikom Paketleriniz : <br> <hr>";
+                                    echo "Your Kobikom Packages : <br> <hr>";
                                     if ($KobiKom_get_Credit) {
                                         foreach ($KobiKom_get_Credit as $key => $value) {
-                                            echo $value['name'] . ' : <br> Kalan Kredi ' . $value['amount'] . ' SMS <br> Paketin Son Kullanma Tarihi : ' . $value['finished_at'] . '<br>';
+                                            echo $value['name'] . ' : <br> Remaining Credit ' . $value['amount'] . ' SMS <br> Package Expiration Date: ' . $value['finished_at'] . '<br>';
                                         }
-                                       
-                                    }else
-                                    {
-                                        echo "Kobikom Api Keyiniz yanlis";
+                                    } else {
+                                        echo "Your Kobikom Api Key is incorrect";
                                     }
                                 }
-
-
                             ?>
                     </td>
                 </tr>
 
                 <tr valign="top">
-                
                     <td>
                         <h3>Variables</h3>
                         <b>{customer_name} : Customer name</b> <br>
@@ -217,7 +212,7 @@ function shipment_tracking_sms_setting_page(){
                 jQuery(document).ready(function ($) {
                     $('input[type=radio][name=sms_provider]').change(function () {
                         if (this.value === 'none') {
-                            $('.netgsm, .Kobikom').hide(); // Hem netgsm hem de Kobikom alanlarını gizle
+                            $('.netgsm, .Kobikom').hide();
                         } else if (this.value === 'NetGSM') {
                             $('.netgsm').show(2000);
                             $('.Kobikom').hide();
