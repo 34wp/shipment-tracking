@@ -14,6 +14,8 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
+define( 'SHIPMENT_TRACKING_VERSION', '1.0.0' );
+
 //Add Menu to WPadmin
 include 'netgsm-helper.php';
 include 'shipment-tracking-helper.php';
