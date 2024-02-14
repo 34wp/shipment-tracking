@@ -5,6 +5,8 @@
  * Version: 1.0.0
  * Author: 34WP
  * Author URI: https://34wp.com
+ * Text Domain: shipment-tracking
+ * Domain Path: /languages
  */
 
 //Add Menu to WPadmin
