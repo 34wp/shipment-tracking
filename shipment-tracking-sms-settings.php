@@ -47,7 +47,7 @@ function shipment_tracking_sms_setting_page(){
                     </td>
 
                     <td>
-                        <input type="radio" id="NetGSM" <?php if( $sms_provider == 'Kobikom' ) echo 'checked'?>
+                        <input type="radio" id="Kobikom" <?php if( $sms_provider == 'Kobikom' ) echo 'checked'?>
                             name="sms_provider" value="Kobikom">
                         <label for="Kobikom">Kobikom</label><br>
                     </td>
