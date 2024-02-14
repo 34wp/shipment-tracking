@@ -216,25 +216,19 @@ function shipment_tracking_sms_setting_page(){
             <script>
                 jQuery(document).ready(function ($) {
                     $('input[type=radio][name=sms_provider]').change(function () {
-                        if (this.value == 'none') {
-                            $('.netgsm').hide();
-
-                        } else if (this.value == 'NetGSM') {
+                        if (this.value === 'none') {
+                            $('.netgsm, .Kobikom').hide(); // Hem netgsm hem de Kobikom alanlarını gizle
+                        } else if (this.value === 'NetGSM') {
                             $('.netgsm').show(2000);
                             $('.Kobikom').hide();
-                            
-                        }
-                        else if (this.value == 'Kobikom') {
+                        } else if (this.value === 'Kobikom') {
                             $('.Kobikom').show(2000);
                             $('.netgsm').hide();
                         }
                     });
-
-                
-
-                    
                 })
             </script>
+
 
             <style>
                 .label-bold {
