@@ -36,6 +36,16 @@ function shipment_tracking_register_admin_menu() {
     add_action( 'admin_init', 'shipment_tracking_register_settings' );
 }
 
+// Özel footer içeriği eklemek için 'admin_footer' hook'unu kullanın
+function shipment_tracking_custom_footer_content() {
+    // Mevcut sayfanın slug'ını kontrol edin
+    if (isset($_GET['page']) && strpos($_GET['page'], 'shipment-tracking') !== false) {
+        echo '<span id="footer-thankyou"><a href="https://34wp.com" target="_blank"><img src="https://34wp.com/wp-content/uploads/2024/01/34wp-logo-svg.svg" alt="34WP" style="max-width:50px;"></a></span>';
+    }
+}
+
+add_action('admin_footer_text', 'shipment_tracking_custom_footer_content');
+
 function shipment_tracking_register_settings() {
     $args = array(
         'default' => 'yes',
