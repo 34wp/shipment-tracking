@@ -29,11 +29,11 @@ do_action('woocommerce_email_header', $email_heading, $email);
 <p><?php printf(esc_html__('Merhaba %s,', 'woocommerce'), esc_html($order->get_billing_first_name()));?></p>
 <p> Siparişiniz kargoya verilmiştir. Takip bilgileri aşağıda yer almaktadır:<p>
 <p> Kargo Firması Adı: <strong> <?php
-    echo esc_attr(kargoTR_get_company_name($tracking_company));
+    echo esc_attr(shipment_tracking_get_company_name($tracking_company));
 ?></strong></p>
 <p> Shipment Tracking No:<strong><?php echo esc_attr($tracking_code); ?></strong></p>
 <?php
-    $cargoTrackingUrl = kargoTR_getCargoTrack($tracking_company, $tracking_code);
+    $cargoTrackingUrl = shipment_tracking_getCargoTrack($tracking_company, $tracking_code);
     echo '<a href="'.esc_attr($cargoTrackingUrl).'" target="_blank" rel="noopener noreferrer">';
 
 ?>

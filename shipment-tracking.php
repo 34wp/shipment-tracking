@@ -24,18 +24,19 @@ include 'shipment-tracking-email-settings.php';
 include 'shipment-tracking-sms-settings.php';
 // include 'shipment-tracking-content-edit-helper.php';
 include 'shipment-tracking-wc-api-helper.php';
-add_action( 'admin_menu', 'kargoTR_register_admin_menu' );
-function kargoTR_register_admin_menu() {
+
+add_action( 'admin_menu', 'shipment_tracking_register_admin_menu' );
+function shipment_tracking_register_admin_menu() {
     $menu_slug = 'shipment-tracking';
     // add_menu_page( $page_title, $menu_title, $capability, $menu_slug, $function, $icon_url, $position );
     add_menu_page( 'Shipment Tracking', 'Shipment Tracking', 'read', $menu_slug, false, 'dashicons-car', 20 );
-    add_submenu_page( $menu_slug, 'Shipment Tracking Settings', 'General Settings', 'read', $menu_slug, 'kargoTR_setting_page' );
-    add_submenu_page( $menu_slug, 'Shipment Tracking Settings', 'Email Settings', 'read', 'shipment-tracking-email-settings', 'kargoTR_email_setting_page' );
-    add_submenu_page( $menu_slug, 'Shipment Tracking Settings', 'SMS Settings', 'read', 'shipment-tracking-sms-settings', 'kargoTR_sms_setting_page' );
-    add_action( 'admin_init', 'kargoTR_register_settings' );
+    add_submenu_page( $menu_slug, 'Shipment Tracking Settings', 'General Settings', 'read', $menu_slug, 'shipment_tracking_setting_page' );
+    add_submenu_page( $menu_slug, 'Shipment Tracking Settings', 'Email Settings', 'read', 'shipment-tracking-email-settings', 'shipment_tracking_email_setting_page' );
+    add_submenu_page( $menu_slug, 'Shipment Tracking Settings', 'SMS Settings', 'read', 'shipment-tracking-sms-settings', 'shipment_tracking_sms_setting_page' );
+    add_action( 'admin_init', 'shipment_tracking_register_settings' );
 }
 
-function kargoTR_register_settings() {
+function shipment_tracking_register_settings() {
     $args = array(
         'default' => 'yes',
     );
@@ -53,28 +54,28 @@ function kargoTR_register_settings() {
     );
 
 
-    register_setting( 'kargoTR-settings-group', 'kargo_hazirlaniyor_text',$argsSelect  );
+    register_setting( 'shipment-tracking-settings-group', 'kargo_hazirlaniyor_text',$argsSelect  );
 
-    register_setting( 'kargoTR-settings-group', 'mail_send_general',$argsSelect  );
-    register_setting( 'kargoTR-settings-group', 'sms_provider',$argsSelect  );
+    register_setting( 'shipment-tracking-settings-group', 'mail_send_general',$argsSelect  );
+    register_setting( 'shipment-tracking-settings-group', 'sms_provider',$argsSelect  );
 
-    register_setting( 'kargoTR-settings-group', 'sms_send_general',$argsSelect  );
+    register_setting( 'shipment-tracking-settings-group', 'sms_send_general',$argsSelect  );
 
-    register_setting( 'kargoTR-settings-group', 'NetGsm_UserName',$argsFild  );
-    register_setting( 'kargoTR-settings-group', 'NetGsm_Password',$argsFild  );
-    register_setting( 'kargoTR-settings-group', 'NetGsm_Header',$argsSelect  );
-    register_setting( 'kargoTR-settings-group', 'NetGsm_sms_url_send',$argsSelect  );
+    register_setting( 'shipment-tracking-settings-group', 'NetGsm_UserName',$argsFild  );
+    register_setting( 'shipment-tracking-settings-group', 'NetGsm_Password',$argsFild  );
+    register_setting( 'shipment-tracking-settings-group', 'NetGsm_Header',$argsSelect  );
+    register_setting( 'shipment-tracking-settings-group', 'NetGsm_sms_url_send',$argsSelect  );
 
     // General SMS Template
-    register_setting( 'kargoTR-settings-group', 'kargoTr_sms_template',$argsSmsTemplate  );
+    register_setting( 'shipment-tracking-settings-group', 'shipment_tracking_sms_template',$argsSmsTemplate  );
 
     // Kobikom
-    register_setting( 'kargoTR-settings-group', 'Kobikom_ApiKey',$argsFild  );
-    register_setting( 'kargoTR-settings-group', 'Kobikom_Header',$argsFild  );
+    register_setting( 'shipment-tracking-settings-group', 'Kobikom_ApiKey',$argsFild  );
+    register_setting( 'shipment-tracking-settings-group', 'Kobikom_Header',$argsFild  );
 }
 
 
-function kargoTR_setting_page() {
+function shipment_tracking_setting_page() {
     $kargo_hazirlaniyor_text = get_option('kargo_hazirlaniyor_text');
     $mail_send_general_option = get_option('mail_send_general');
     $sms_provider = get_option('sms_provider');
@@ -89,8 +90,8 @@ function kargoTR_setting_page() {
         <h1>Shipment Tracking</h1>
 
         <form method="post" action="options.php">
-            <?php settings_fields( 'kargoTR-settings-group' ); ?>
-            <?php do_settings_sections( 'kargoTR-settings-group' ); ?>
+            <?php settings_fields( 'shipment-tracking-settings-group' ); ?>
+            <?php do_settings_sections( 'shipment-tracking-settings-group' ); ?>
             <table class="form-table">
                 <tr valign="top">
                     <th scope="row" style="width:50%">
@@ -179,7 +180,7 @@ function kargoTR_setting_page() {
 }
 
 // Register new status
-function kargoTR_register_shipment_shipped_order_status() {
+function shipment_tracking_register_shipment_shipped_order_status() {
     register_post_status('wc-kargo-verildi', array(
         'label' => 'Kargoya verildi',
         'public' => true,
@@ -190,15 +191,15 @@ function kargoTR_register_shipment_shipped_order_status() {
     ));
 }
 
-add_action('init', 'kargoTR_register_shipment_shipped_order_status');
-function kargoTR_add_shipment_to_order_statuses($order_statuses) {
+add_action('init', 'shipment_tracking_register_shipment_shipped_order_status');
+function shipment_tracking_add_shipment_to_order_statuses($order_statuses) {
     $order_statuses['wc-kargo-verildi'] = _x('Kargoya Verildi', 'WooCommerce Order status', 'woocommerce');
     return $order_statuses;
 }
 
-add_filter('wc_order_statuses', 'kargoTR_add_shipment_to_order_statuses');
-add_action('woocommerce_admin_order_data_after_order_details', 'kargoTR_general_shipment_details_for_admin');
-function kargoTR_general_shipment_details_for_admin($order) {
+add_filter('wc_order_statuses', 'shipment_tracking_add_shipment_to_order_statuses');
+add_action('woocommerce_admin_order_data_after_order_details', 'shipment_tracking_general_shipment_details_for_admin');
+function shipment_tracking_general_shipment_details_for_admin($order) {
     $tracking_company = get_post_meta($order->get_id(), 'tracking_company', true);
     $tracking_code = get_post_meta($order->get_id(), 'tracking_code', true);
     ?>
@@ -213,7 +214,7 @@ function kargoTR_general_shipment_details_for_admin($order) {
         'desc_tip' => true,
         'value' => $tracking_company,
         'placeholder' => 'Kargo Seçilmedi',
-        'options' => kargoTR_cargo_company_list(),
+        'options' => shipment_tracking_cargo_company_list(),
         'wrapper_class' => 'form-field-wide shipment-set-tip-style',
     ));
 
@@ -236,8 +237,8 @@ function kargoTR_general_shipment_details_for_admin($order) {
 
 }
 
-add_action('woocommerce_process_shop_order_meta', 'kargoTR_tracking_save_general_details');
-function kargoTR_tracking_save_general_details($ord_id) {
+add_action('woocommerce_process_shop_order_meta', 'shipment_tracking_tracking_save_general_details');
+function shipment_tracking_tracking_save_general_details($ord_id) {
     $tracking_company = get_post_meta($ord_id, 'tracking_company', true);
     $tracking_code = get_post_meta($ord_id, 'tracking_code', true);
     $order_note = wc_get_order($ord_id);
@@ -271,8 +272,8 @@ function kargoTR_tracking_save_general_details($ord_id) {
     }
 }
 
-add_action('admin_head', 'kargoTR_shipment_fix_wc_tooltips');
-function kargoTR_shipment_fix_wc_tooltips() {
+add_action('admin_head', 'shipment_tracking_shipment_fix_wc_tooltips');
+function shipment_tracking_shipment_fix_wc_tooltips() {
     echo '<style>
 	    #order_data .order_data_column .form-field.shipment-set-tip-style label{
 		    display:inline-block;
@@ -283,7 +284,7 @@ function kargoTR_shipment_fix_wc_tooltips() {
 	    </style>';
 }
 
-function kargoTR_shipment_details($order) {
+function shipment_tracking_shipment_details($order) {
     $tracking_company = get_post_meta($order->get_id(), 'tracking_company', true);
     $tracking_code = get_post_meta($order->get_id(), 'tracking_code', true);
     $kargo_hazirlaniyor_text_option = get_option('kargo_hazirlaniyor_text');
@@ -301,25 +302,25 @@ function kargoTR_shipment_details($order) {
             ?>
 <div class="shipment-order-page">
     <h2 id="kargoTakipSection">Shipment Tracking</h2>
-    <h4>Kargo firması : </h4> <?php echo kargoTR_get_company_name($tracking_company); ?>
+    <h4>Kargo firması : </h4> <?php echo shipment_tracking_get_company_name($tracking_company); ?>
     <h4><?php _e( 'Shipment Tracking numarası:','kargoTR');?></h4> <?php echo esc_attr($tracking_code) ?>
     <br>
-    <?php echo '<a href="' . kargoTR_getCargoTrack($tracking_company, $tracking_code) . '"target="_blank" rel="noopener noreferrer">'; _e( 'Kargonuzu takibi için buraya tıklayın.','kargoTR' );  echo '</a>'; ?>
+    <?php echo '<a href="' . shipment_tracking_getCargoTrack($tracking_company, $tracking_code) . '"target="_blank" rel="noopener noreferrer">'; _e( 'Kargonuzu takibi için buraya tıklayın.','kargoTR' );  echo '</a>'; ?>
 </div>
 <?php
         }
     }
 }
 
-add_action('woocommerce_after_order_details', 'kargoTR_shipment_details');
-add_filter('woocommerce_my_account_my_orders_actions', 'kargoTR_add_kargo_button_in_order', 10, 2);
-function kargoTR_add_kargo_button_in_order($actions, $order) {
+add_action('woocommerce_after_order_details', 'shipment_tracking_shipment_details');
+add_filter('woocommerce_my_account_my_orders_actions', 'shipment_tracking_add_kargo_button_in_order', 10, 2);
+function shipment_tracking_add_kargo_button_in_order($actions, $order) {
     $tracking_company = get_post_meta($order->get_id(), 'tracking_company', true);
     $tracking_code = get_post_meta($order->get_id(), 'tracking_code', true);
     $action_slug = 'kargoButonu';
 
     if (!empty($tracking_code)) {
-        $cargoTrackingUrl = kargoTR_getCargoTrack($tracking_company, $tracking_code);
+        $cargoTrackingUrl = shipment_tracking_getCargoTrack($tracking_company, $tracking_code);
         $actions[$action_slug] = array(
             'url' => $cargoTrackingUrl,
             'name' => 'Kargo Takibi',
@@ -330,7 +331,7 @@ function kargoTR_add_kargo_button_in_order($actions, $order) {
     }
 }
 
-function kargoTR_kargo_bildirim_icerik($order, $mailer, $mail_title = false) {
+function shipment_tracking_kargo_bildirim_icerik($order, $mailer, $mail_title = false) {
     $template = 'email-shipment-template.php';
     $mailTemplatePath = untrailingslashit(plugin_dir_path(__FILE__)) . '/mail-template/';
 
@@ -351,7 +352,7 @@ function kargoTR_kargo_bildirim_icerik($order, $mailer, $mail_title = false) {
 
 
 
-function kargoTR_kargo_eposta_details($order_id) {
+function shipment_tracking_kargo_eposta_details($order_id) {
     $order = wc_get_order($order_id);
     $phone = $order->get_billing_phone();
     $alici = $order->get_shipping_first_name() . " " . $order->get_shipping_last_name();
@@ -359,7 +360,7 @@ function kargoTR_kargo_eposta_details($order_id) {
 
     $mailTo = $order->get_billing_email();
     $subject = "Siparişiniz Kargoya Verildi";
-    $details = kargoTR_kargo_bildirim_icerik($order, $mailer, $subject);
+    $details = shipment_tracking_kargo_bildirim_icerik($order, $mailer, $subject);
     $mailHeaders[] = "Content-Type: text/html\r\n";
 
     $mailer->send($mailTo, $subject, $details, $mailHeaders);
@@ -371,4 +372,4 @@ function kargoTR_kargo_eposta_details($order_id) {
     $order->save();
 }
 
-add_action('order_ship_mail', 'kargoTR_kargo_eposta_details');
+add_action('order_ship_mail', 'shipment_tracking_kargo_eposta_details');

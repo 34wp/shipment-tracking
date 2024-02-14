@@ -7,7 +7,7 @@
 add_action( 'rest_api_init', function () {
     register_rest_route( 'wc/v3', '/kargo_takip', array(
         'methods' => 'post',
-        'callback' => 'kargoTR_api_add_tracking_code',
+        'callback' => 'shipment_tracking_api_add_tracking_code',
         'permission_callback' => '__return_true',
         'check_authentication' => true,
 
@@ -15,7 +15,7 @@ add_action( 'rest_api_init', function () {
     ) );
 } );
 
-function kargoTR_api_add_tracking_code() {
+function shipment_tracking_api_add_tracking_code() {
 
     //get order id from url parse
     $order_id = $_POST['order_id'];
@@ -52,12 +52,12 @@ function kargoTR_api_add_tracking_code() {
     }
 
     //Check if shipment company is valid
-    if ( ! kargoTR_is_valid_shipment_company($shipment_company) ) {
+    if ( ! shipment_tracking_is_valid_shipment_company($shipment_company) ) {
         return new WP_Error( 'rest_invalid_shipment_company', 'Invalid shipment company. Should be same as document list', array( 'status' => 401 ) );
     }
 
     //check if order id is valid
-    if ( ! kargoTR_is_valid_order_id($order_id) ) {
+    if ( ! shipment_tracking_is_valid_order_id($order_id) ) {
         return new WP_Error( 'rest_invalid_order_id', 'Invalid order id. Please check order id', array( 'status' => 401 ) );
     }
 
@@ -125,7 +125,7 @@ function kargoTR_api_add_tracking_code() {
 
 }
 
-function kargoTR_is_valid_shipment_company($shipment_company) {
+function shipment_tracking_is_valid_shipment_company($shipment_company) {
 
     //get shipment company list from config.php
 
@@ -147,7 +147,7 @@ function kargoTR_is_valid_shipment_company($shipment_company) {
 }
 
 
-function kargoTR_is_valid_order_id($order_id) {
+function shipment_tracking_is_valid_order_id($order_id) {
 
     //get order from order id
 

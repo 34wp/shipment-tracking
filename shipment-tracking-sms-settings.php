@@ -2,7 +2,7 @@
 
 include('kobikom-helper.php');
 
-function kargoTR_sms_setting_page(){
+function shipment_tracking_sms_setting_page(){
 
     $sms_provider = get_option('sms_provider');
 
@@ -15,16 +15,16 @@ function kargoTR_sms_setting_page(){
     $Kobikom_ApiKey = get_option('Kobikom_ApiKey');
     $Kobikom_option_Header = get_option('Kobikom_Header');
 
-    //get sms template kargoTr_sms_template
-    $sms_template = get_option('kargoTr_sms_template');
+    //get sms template shipment_tracking_sms_template
+    $sms_template = get_option('shipment_tracking_sms_template');
 
     ?>
     <div class="wrap">
         <h1>SMS Settings</h1>
 
         <form method="post" action="options.php">
-            <?php settings_fields( 'kargoTR-settings-group' ); ?>
-            <?php do_settings_sections( 'kargoTR-settings-group' ); ?>
+            <?php settings_fields( 'shipment-tracking-settings-group' ); ?>
+            <?php do_settings_sections( 'shipment-tracking-settings-group' ); ?>
             <table class="form-table">
  
  
@@ -84,7 +84,7 @@ function kargoTR_sms_setting_page(){
                         <label for="NetGsm_Header" class="label-bold">SMS Başlığınız </label> <br>
                         <?php
                                 if ($NetGsm_Password && $NetGsm_UserName) {
-                                    $netGsm_Header_get = kargoTR_get_netgsm_headers($NetGsm_UserName,$NetGsm_Password);
+                                    $netGsm_Header_get = shipment_tracking_get_netgsm_headers($NetGsm_UserName,$NetGsm_Password);
                                     if (!$netGsm_Header_get) {
                                         echo 'NetGSM kullanici adi veya sifreniz yanlis';
                                     } else {
@@ -104,8 +104,8 @@ function kargoTR_sms_setting_page(){
                     <td>
                         <?php
                                 if ($NetGsm_Password && $NetGsm_UserName) {
-                                    $NetGSM_packet_info = kargoTR_get_netgsm_packet_info($NetGsm_UserName,$NetGsm_Password);
-                                    $NetGSM_credit_info = kargoTR_get_netgsm_credit_info($NetGsm_UserName,$NetGsm_Password);
+                                    $NetGSM_packet_info = shipment_tracking_get_netgsm_packet_info($NetGsm_UserName,$NetGsm_Password);
+                                    $NetGSM_credit_info = shipment_tracking_get_netgsm_credit_info($NetGsm_UserName,$NetGsm_Password);
                                     if ($NetGSM_packet_info) {
                                         echo '<b>Kalan Paketleriniz :</b> <br> '.__($NetGSM_packet_info);
                                     }
@@ -148,7 +148,7 @@ function kargoTR_sms_setting_page(){
                         <?php
                         
                                 if ($Kobikom_ApiKey) { 
-                                    $KobiKom_get_Headers = kargoTR_get_kobikom_headers($Kobikom_ApiKey);
+                                    $KobiKom_get_Headers = shipment_tracking_get_kobikom_headers($Kobikom_ApiKey);
                                     if (!$KobiKom_get_Headers) {
                                         echo 'Kobikom Api Keyiniz yanlis';
                                     } else {
@@ -170,7 +170,7 @@ function kargoTR_sms_setting_page(){
                         
                         <?php
                                 if ($Kobikom_ApiKey){
-                                    $KobiKom_get_Credit = kargoTR_get_kobikom_balance($Kobikom_ApiKey);
+                                    $KobiKom_get_Credit = shipment_tracking_get_kobikom_balance($Kobikom_ApiKey);
                                     echo "Kobikom Paketleriniz : <br> <hr>";
                                     if ($KobiKom_get_Credit) {
                                         foreach ($KobiKom_get_Credit as $key => $value) {
@@ -200,7 +200,7 @@ function kargoTR_sms_setting_page(){
                     </td>
                     <td colspan="2">
 
-                        <textarea type="text" id="sms_template" style="width:100%" name="kargoTr_sms_template" rows="6" placeholder="Dear {customer_name}, your order with {order_id} has been delivered to {company_name}. Your cargo tracking number: {tracking_number}. Your cargo tracking link: {tracking_url}. Good day."><?php echo esc_attr($sms_template); ?></textarea>
+                        <textarea type="text" id="sms_template" style="width:100%" name="shipment_tracking_sms_template" rows="6" placeholder="Dear {customer_name}, your order with {order_id} has been delivered to {company_name}. Your cargo tracking number: {tracking_number}. Your cargo tracking link: {tracking_url}. Good day."><?php echo esc_attr($sms_template); ?></textarea>
 
                     </td>
                      

@@ -1,6 +1,6 @@
 <?php
 
 
-function kargoTR_email_setting_page(){
+function shipment_tracking_email_setting_page(){
     
 }

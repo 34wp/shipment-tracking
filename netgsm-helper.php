@@ -1,6 +1,6 @@
 <?php
 
-function kargoTR_get_netgsm_headers($username,$password) {
+function shipment_tracking_get_netgsm_headers($username,$password) {
     $password= urlencode($password);
     $url= "https://api.netgsm.com.tr/sms/header/?usercode=$username&password=$password";
     $request = wp_remote_get($url);
@@ -12,7 +12,7 @@ function kargoTR_get_netgsm_headers($username,$password) {
     }
 }
 
-function kargoTR_get_netgsm_packet_info($username,$password) {
+function shipment_tracking_get_netgsm_packet_info($username,$password) {
     $password= urlencode($password);
     $url= "https://api.netgsm.com.tr/balance/list/get/?usercode=$username&password=$password&tip=1";
     $request = wp_remote_get($url);
@@ -24,7 +24,7 @@ function kargoTR_get_netgsm_packet_info($username,$password) {
     }
 }
 
-function kargoTR_get_netgsm_credit_info($username,$password) {
+function shipment_tracking_get_netgsm_credit_info($username,$password) {
     $password= urlencode($password);
     $url= "https://api.netgsm.com.tr/balance/list/get/?usercode=$username&password=$password";
     $request = wp_remote_get($url);
@@ -37,7 +37,7 @@ function kargoTR_get_netgsm_credit_info($username,$password) {
 }
 
 
-function kargoTR_SMS_gonder_netgsm($order_id) {
+function shipment_tracking_SMS_gonder_netgsm($order_id) {
     $order = wc_get_order($order_id);
     $phone = $order->get_billing_phone();
 
@@ -49,15 +49,15 @@ function kargoTR_SMS_gonder_netgsm($order_id) {
     $tracking_company = get_post_meta($order_id, 'tracking_company', true);
     $tracking_code = get_post_meta($order_id, 'tracking_code', true);
 
-    $message = "Siparişinizin Shipment Tracking numarası : " . $tracking_code . ", " . kargoTR_get_company_name($tracking_company) . " kargo firması ile takip edebilirsiniz.";
+    $message = "Siparişinizin Shipment Tracking numarası : " . $tracking_code . ", " . shipment_tracking_get_company_name($tracking_company) . " kargo firması ile takip edebilirsiniz.";
     $message = urlencode($message);
 
     if ($NetGsm_sms_url_send == 'yes') {
-        $message = $message." ".urlencode("Takip URL : ").kargoTR_getCargoTrack($tracking_company, $tracking_code);
+        $message = $message." ".urlencode("Takip URL : ").shipment_tracking_getCargoTrack($tracking_company, $tracking_code);
     }
 
     if($NetGsm_Header == "yes"){
-        $NetGsm_Header = kargoTR_get_netgsm_headers($NetGsm_UserName, $NetGsm_Password);
+        $NetGsm_Header = shipment_tracking_get_netgsm_headers($NetGsm_UserName, $NetGsm_Password);
         $NetGsm_Header = $NetGsm_Header[0];
     }
 
@@ -75,6 +75,6 @@ function kargoTR_SMS_gonder_netgsm($order_id) {
     // $order->add_order_note("Debug : ".$request['body']);
 
 }
-add_action('order_send_sms', 'kargoTR_SMS_gonder_netgsm');
+add_action('order_send_sms', 'shipment_tracking_SMS_gonder_netgsm');
 
 ?>
