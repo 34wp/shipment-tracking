@@ -40,7 +40,7 @@ function kargoTR_register_settings() {
     );
 
     $argsSmsTemplate = array(
-        'default' => 'Merhaba {customer_name} , {order_id} nolu siparişiniz kargoya verildi. Shipment Tracking numaranız : {tracking_number} .Shipment Tracking linkiniz : {tracking_url} ,İyi günler dileriz.',
+        'default' => 'Dear {customer_name}, your order with {order_id} has been delivered to {company_name}. Your cargo tracking number: {tracking_number}. Your cargo tracking link: {tracking_url}. Good day.',
     );
 
 
@@ -56,11 +56,10 @@ function kargoTR_register_settings() {
     register_setting( 'kargoTR-settings-group', 'NetGsm_Header',$argsSelect  );
     register_setting( 'kargoTR-settings-group', 'NetGsm_sms_url_send',$argsSelect  );
 
-    //general sms template
+    // General SMS Template
     register_setting( 'kargoTR-settings-group', 'kargoTr_sms_template',$argsSmsTemplate  );
 
-    //kobikom
-
+    // Kobikom
     register_setting( 'kargoTR-settings-group', 'Kobikom_ApiKey',$argsFild  );
     register_setting( 'kargoTR-settings-group', 'Kobikom_Header',$argsFild  );
 }
@@ -124,89 +123,6 @@ function kargoTR_setting_page() {
                     </td>
                     <td>
                         <hr>
-                    </td>
-                </tr>
-                <tr valign="top">
-                    <th scope="row" style="width:50%">
-                        <?php _e( 'Otomatik SMS Gönderilsin mi ? Gönderilmesini istiyorsanız firma seçin', 'kargoTR' ) ?>
-                    </th>
-                    <td>
-                        <input type="radio" id="none" <?php if( $sms_provider == 'none' ) echo 'checked'?>
-                            name="sms_provider" value="none">
-                        <label for="none">None</label><br>
-                    </td>
-                    <td>
-                        <input type="radio" id="NetGSM" <?php if( $sms_provider == 'NetGSM' ) echo 'checked'?>
-                            name="sms_provider" value="NetGSM">
-                        <label for="NetGSM">NetGSM</label><br>
-                    </td>
-                </tr>
-
-                <tr class="netgsm" <?php if( $sms_provider != 'NetGSM' ) echo 'style="display:none"'?>>
-                    <th scope="row" style="width:50%">
-                        <hr>
-                    </th>
-                    <td>
-                        <hr>
-                    </td>
-                    <td>
-                        <hr>
-                    </td>
-                </tr>
-
-                <tr valign="top" class="netgsm" <?php if( $sms_provider != 'NetGSM' ) echo 'style="display:none"'?>>
-                    <th scope="row" style="width:25%">
-                        <?php _e( 'NetGSM Bilgileriniz <br> Abone numarasının başında 0 olmadan giriniz orneğin 212xxxxxx <br> Şifrenizide girdikten sonra kaydedin eğer şifre ve abone numaranız dogruysa <br> Sms baslıklarınız çıkacaktır <br> Lütfen başlık seçip kaydedin tekrardan', 'kargoTR' ) ?>
-                    </th>
-                    <td>
-                        <label for="NetGsm_UserName" class="label-bold">Abone Numarası </label> <br>
-                        <input type="text" id="NetGsm_UserName" name="NetGsm_UserName"
-                            value="<?php echo esc_attr($NetGsm_UserName); ?>">
-                    </td>
-                    <td>
-                        <label for="NetGSM" class="label-bold">NetGSM Şifresi</label> <br>
-                        <input type="password" id="NetGSM" name="NetGsm_Password"
-                            value="<?php echo __($NetGsm_Password);?>">
-                        <br>
-                    </td>
-                </tr>
-
-                <tr valign="top" class="netgsm" <?php if ($sms_provider != 'NetGSM') echo 'style="display:none"'?>>
-                    <th scope="row" style="width:25%"></th>
-                    <td>
-                        <label for="NetGsm_Header" class="label-bold">SMS Başlığınız </label> <br>
-                        <?php
-                                if ($NetGsm_Password && $NetGsm_UserName) {
-                                    $netGsm_Header_get = kargoTR_get_netgsm_headers($NetGsm_UserName,$NetGsm_Password);
-                                    if (!$netGsm_Header_get) {
-                                        echo 'NetGSM kullanici adi veya sifreniz yanlis';
-                                    } else {
-                                        echo '<select name="NetGsm_Header" id="NetGsm_Header">';
-                                        foreach ($netGsm_Header_get as $key => $value) {
-                                            if ($NetGsm_Header == $value) {
-                                                echo '<option selected value="'.$value.'">'.$value.'</option>';
-                                            } else {
-                                                echo '<option value="'.$value.'">'.$value.'</option>';
-                                            }
-                                        }
-                                        echo '</select>';
-                                    }
-                                }
-                            ?>
-                    </td>
-                    <td>
-                        <?php
-                                if ($NetGsm_Password && $NetGsm_UserName) {
-                                    $NetGSM_packet_info = kargoTR_get_netgsm_packet_info($NetGsm_UserName,$NetGsm_Password);
-                                    $NetGSM_credit_info = kargoTR_get_netgsm_credit_info($NetGsm_UserName,$NetGsm_Password);
-                                    if ($NetGSM_packet_info) {
-                                        echo '<b>Kalan Paketleriniz :</b> <br> '.__($NetGSM_packet_info);
-                                    }
-                                    if ($NetGSM_credit_info) {
-                                        echo '<b>Kalan Krediniz :</b> <br> '.esc_attr($NetGSM_credit_info) .' TL';
-                                    }
-                                }
-                            ?>
                     </td>
                 </tr>
 
