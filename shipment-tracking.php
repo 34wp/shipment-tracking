@@ -97,33 +97,33 @@ function shipment_tracking_setting_page() {
             <table class="form-table">
                 <tr valign="top">
                     <th scope="row" style="width:50%">
-                        <?php _e( 'Kargo bilgisi girmeden önce şiparişlerin içinde gösterilen kargo hazırlanıyor yazısı gösterilsin mi ?', 'shipment-tracking' ) ?>
+                        <?php _e( 'Before entering the cargo information, the message "Cargo is being prepared" should be displayed in the orders.', 'shipment-tracking' ) ?>
                     </th>
                     <td>
                         <input type="radio" id="evet" <?php if( $kargo_hazirlaniyor_text == 'yes' ) echo 'checked'?>
                             name="kargo_hazirlaniyor_text" value="yes">
-                        <label for="evet">Evet</label><br>
+                        <label for="evet">Yes</label><br>
                     </td>
                     <td>
                         <input type="radio" id="hayir" <?php if( $kargo_hazirlaniyor_text == 'no' ) echo 'checked'?>
                             name="kargo_hazirlaniyor_text" value="no">
-                        <label for="hayir">Hayır</label><br>
+                        <label for="hayir">No</label><br>
                     </td>
                 </tr>
 
                 <tr valign="top">
                     <th scope="row" style="width:50%">
-                        <?php _e( 'Kargo bilgisi girildiğinde mail otomatik gönderilsin mi ?', 'shipment-tracking' ) ?>
+                        <?php _e( 'Automatically send an e-mail when the cargo tracking number is entered in the order.', 'shipment-tracking' ) ?>
                     </th>
                     <td>
                         <input type="radio" id="evetmail" <?php if( $mail_send_general_option == 'yes' ) echo 'checked'?>
                             name="mail_send_general" value="yes">
-                        <label for="evetmail">Evet</label><br>
+                        <label for="evetmail">Yes</label><br>
                     </td>
                     <td>
                         <input type="radio" id="hayirmail" <?php if( $mail_send_general_option == 'no' ) echo 'checked'?>
                             name="mail_send_general" value="no">
-                        <label for="hayirmail">Hayır</label><br>
+                        <label for="hayirmail">No</label><br>
                     </td>
                 </tr>
                 <tr>
@@ -140,17 +140,17 @@ function shipment_tracking_setting_page() {
 
                 <tr valign="top">
                     <th scope="row" style="width:50%">
-                        <?php _e( 'Shipment Tracking URL de gönderilsin mi ? <br> Eğer bu özelliği açarsanız sms boyutunuz muhtemelen daha büyük olacak ve ekstradan kredi harçayacaktır paketinizden.', 'shipment-tracking' ) ?>
+                        <?php _e( 'Send in Shipment Tracking URL? <br> If you turn on this feature, your SMS size will probably be larger and extra credit will be charged from your package.', 'shipment-tracking' ) ?>
                     </th>
                     <td>
                         <input type="radio" id="yes_url_send" <?php if( $NetGsm_sms_url_send == 'yes' ) echo 'checked'?>
                             name="NetGsm_sms_url_send" value="yes">
-                        <label for="yes_url_send">Evet</label><br>
+                        <label for="yes_url_send">Yes</label><br>
                     </td>
                     <td>
                         <input type="radio" id="noUrlSend" <?php if( $NetGsm_sms_url_send == 'no' ) echo 'checked'?>
                             name="NetGsm_sms_url_send" value="no">
-                        <label for="noUrlSend">Hayır</label><br>
+                        <label for="noUrlSend">No</label><br>
                     </td>
                 </tr>
             </table>
@@ -184,18 +184,18 @@ function shipment_tracking_setting_page() {
 // Register new status
 function shipment_tracking_register_shipment_shipped_order_status() {
     register_post_status('wc-kargo-verildi', array(
-        'label' => 'Kargoya verildi',
+        'label' => 'Shipped',
         'public' => true,
         'exclude_from_search' => false,
         'show_in_admin_all_list' => true,
         'show_in_admin_status_list' => true,
-        'label_count' => _n_noop('Kargoya verildi(%s)', 'Kargoya verildi (%s)'),
+        'label_count' => _n_noop('Shipped(%s)', 'Shipped (%s)'),
     ));
 }
 
 add_action('init', 'shipment_tracking_register_shipment_shipped_order_status');
 function shipment_tracking_add_shipment_to_order_statuses($order_statuses) {
-    $order_statuses['wc-kargo-verildi'] = _x('Kargoya Verildi', 'WooCommerce Order status', 'woocommerce');
+    $order_statuses['wc-kargo-verildi'] = _x('Shipped', 'WooCommerce Order status', 'woocommerce');
     return $order_statuses;
 }
 
@@ -211,11 +211,11 @@ function shipment_tracking_general_shipment_details_for_admin($order) {
 
     woocommerce_wp_select(array(
         'id' => 'tracking_company',
-        'label' => 'Kargo Firması:',
-        'description' => 'Lütfen kargo firmasınız seçiniz',
+        'label' => 'Shipping Company:',
+        'description' => 'Please choose a shipping company!',
         'desc_tip' => true,
         'value' => $tracking_company,
-        'placeholder' => 'Kargo Seçilmedi',
+        'placeholder' => 'Not Selected',
         'options' => shipment_tracking_cargo_company_list(),
         'wrapper_class' => 'form-field-wide shipment-set-tip-style',
     ));
@@ -230,8 +230,8 @@ function shipment_tracking_general_shipment_details_for_admin($order) {
 
     woocommerce_wp_text_input(array(
         'id' => 'tracking_code',
-        'label' => 'Takip Numarası:',
-        'description' => 'Lütfen Shipment Tracking numarasını giriniz.',
+        'label' => 'Tracking number:',
+        'description' => 'Please enter the shipment tracking number.',
         'desc_tip' => true,
         'value' => $tracking_code,
         'wrapper_class' => 'form-field-wide shipment-set-tip-style',
@@ -250,13 +250,13 @@ function shipment_tracking_tracking_save_general_details($ord_id) {
     if (($tracking_company != $_POST['tracking_company']) && ($tracking_code == $_POST['tracking_code'])) {
         update_post_meta($ord_id, 'tracking_company', wc_clean($_POST['tracking_company']));
 
-        $note = __("Kargo firması güncellendi.");
+        $note = __("Shipping company has been updated.");
 
         $order_note->add_order_note($note);
     } elseif (($tracking_company == $_POST['tracking_company']) && ($tracking_code != $_POST['tracking_code'])) {
         update_post_meta($ord_id, 'tracking_code', wc_sanitize_textarea($_POST['tracking_code']));
 
-        $note = __("Shipment Tracking kodu güncellendi.");
+        $note = __("Shipment tracking code updated.");
 
         $order_note->add_order_note($note);
     } elseif (($tracking_company == $_POST['tracking_company']) && ($tracking_code == $_POST['tracking_code'])) {
@@ -293,7 +293,7 @@ function shipment_tracking_shipment_details($order) {
     if ( $order->get_status() != 'cancelled') {
         if ($tracking_company == '') {
             if ($kargo_hazirlaniyor_text_option =='yes') {
-                echo "Kargo hazırlanıyor";
+                echo "Shipping is being prepared";
             } else {
             ?>
 
@@ -304,10 +304,10 @@ function shipment_tracking_shipment_details($order) {
             ?>
 <div class="shipment-order-page">
     <h2 id="kargoTakipSection">Shipment Tracking</h2>
-    <h4>Kargo firması : </h4> <?php echo shipment_tracking_get_company_name($tracking_company); ?>
-    <h4><?php _e( 'Shipment Tracking numarası:','shipment-tracking');?></h4> <?php echo esc_attr($tracking_code) ?>
+    <h4>Shipping company : </h4> <?php echo shipment_tracking_get_company_name($tracking_company); ?>
+    <h4><?php _e( 'Shipment tracking number:','shipment-tracking');?></h4> <?php echo esc_attr($tracking_code) ?>
     <br>
-    <?php echo '<a href="' . shipment_tracking_getCargoTrack($tracking_company, $tracking_code) . '"target="_blank" rel="noopener noreferrer">'; _e( 'Kargonuzu takibi için buraya tıklayın.','shipment-tracking' );  echo '</a>'; ?>
+    <?php echo '<a href="' . shipment_tracking_getCargoTrack($tracking_company, $tracking_code) . '"target="_blank" rel="noopener noreferrer">'; _e( 'Click here for shipment tracking.','shipment-tracking' );  echo '</a>'; ?>
 </div>
 <?php
         }
@@ -325,7 +325,7 @@ function shipment_tracking_add_kargo_button_in_order($actions, $order) {
         $cargoTrackingUrl = shipment_tracking_getCargoTrack($tracking_company, $tracking_code);
         $actions[$action_slug] = array(
             'url' => $cargoTrackingUrl,
-            'name' => 'Kargo Takibi',
+            'name' => 'Shipping Tracking',
         );
         return $actions;
     } else {
@@ -367,7 +367,7 @@ function shipment_tracking_kargo_eposta_details($order_id) {
 
     $mailer->send($mailTo, $subject, $details, $mailHeaders);
 
-    $note = __("Müşterinin " . $order->get_billing_email() . " e-postasına Shipment Tracking bilgileri gönderilmiştir.");
+    $note = __("Shipment Tracking information has been sent to the customer's " . $order->get_billing_email() . " email.");
     $order->add_order_note($note);
 
     // Siparişi güncelle
