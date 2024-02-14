@@ -97,7 +97,7 @@ function shipment_tracking_setting_page() {
             <table class="form-table">
                 <tr valign="top">
                     <th scope="row" style="width:50%">
-                        <?php _e( 'Kargo bilgisi girmeden önce şiparişlerin içinde gösterilen kargo hazırlanıyor yazısı gösterilsin mi ?', 'kargoTR' ) ?>
+                        <?php _e( 'Kargo bilgisi girmeden önce şiparişlerin içinde gösterilen kargo hazırlanıyor yazısı gösterilsin mi ?', 'shipment-tracking' ) ?>
                     </th>
                     <td>
                         <input type="radio" id="evet" <?php if( $kargo_hazirlaniyor_text == 'yes' ) echo 'checked'?>
@@ -113,7 +113,7 @@ function shipment_tracking_setting_page() {
 
                 <tr valign="top">
                     <th scope="row" style="width:50%">
-                        <?php _e( 'Kargo bilgisi girildiğinde mail otomatik gönderilsin mi ?', 'kargoTR' ) ?>
+                        <?php _e( 'Kargo bilgisi girildiğinde mail otomatik gönderilsin mi ?', 'shipment-tracking' ) ?>
                     </th>
                     <td>
                         <input type="radio" id="evetmail" <?php if( $mail_send_general_option == 'yes' ) echo 'checked'?>
@@ -140,7 +140,7 @@ function shipment_tracking_setting_page() {
 
                 <tr valign="top">
                     <th scope="row" style="width:50%">
-                        <?php _e( 'Shipment Tracking URL de gönderilsin mi ? <br> Eğer bu özelliği açarsanız sms boyutunuz muhtemelen daha büyük olacak ve ekstradan kredi harçayacaktır paketinizden.', 'kargoTR' ) ?>
+                        <?php _e( 'Shipment Tracking URL de gönderilsin mi ? <br> Eğer bu özelliği açarsanız sms boyutunuz muhtemelen daha büyük olacak ve ekstradan kredi harçayacaktır paketinizden.', 'shipment-tracking' ) ?>
                     </th>
                     <td>
                         <input type="radio" id="yes_url_send" <?php if( $NetGsm_sms_url_send == 'yes' ) echo 'checked'?>
@@ -305,9 +305,9 @@ function shipment_tracking_shipment_details($order) {
 <div class="shipment-order-page">
     <h2 id="kargoTakipSection">Shipment Tracking</h2>
     <h4>Kargo firması : </h4> <?php echo shipment_tracking_get_company_name($tracking_company); ?>
-    <h4><?php _e( 'Shipment Tracking numarası:','kargoTR');?></h4> <?php echo esc_attr($tracking_code) ?>
+    <h4><?php _e( 'Shipment Tracking numarası:','shipment-tracking');?></h4> <?php echo esc_attr($tracking_code) ?>
     <br>
-    <?php echo '<a href="' . shipment_tracking_getCargoTrack($tracking_company, $tracking_code) . '"target="_blank" rel="noopener noreferrer">'; _e( 'Kargonuzu takibi için buraya tıklayın.','kargoTR' );  echo '</a>'; ?>
+    <?php echo '<a href="' . shipment_tracking_getCargoTrack($tracking_company, $tracking_code) . '"target="_blank" rel="noopener noreferrer">'; _e( 'Kargonuzu takibi için buraya tıklayın.','shipment-tracking' );  echo '</a>'; ?>
 </div>
 <?php
         }

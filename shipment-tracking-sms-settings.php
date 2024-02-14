@@ -32,7 +32,7 @@ function shipment_tracking_sms_setting_page(){
  
                 <tr valign="top">
                     <th scope="row" style="width:50%">
-                        <?php _e( 'SMS Service Provider', 'kargoTR' ) ?><br>
+                        <?php _e( 'SMS Service Provider', 'shipment-tracking' ) ?><br>
                         <span style="font-size:12px;">When you add a cargo tracking number to the order, an SMS is automatically sent to the customer.</span>
                     </th>
                     <td>
@@ -67,7 +67,7 @@ function shipment_tracking_sms_setting_page(){
 
                 <tr valign="top" class="netgsm" <?php if( $sms_provider != 'NetGSM' ) echo 'style="display:none"'?>>
                     <th scope="row" style="width:25%">
-                        <?php _e( 'Your NetGSM Information <br> Enter the subscriber number without a leading 0 (E.g. 212xxxxxx) <br> After entering your password, save it if your password and subscriber number are correct <br> Your SMS titles will appear <br> Please select the title and save again.', 'kargoTR' ) ?>
+                        <?php _e( 'Your NetGSM Information <br> Enter the subscriber number without a leading 0 (E.g. 212xxxxxx) <br> After entering your password, save it if your password and subscriber number are correct <br> Your SMS titles will appear <br> Please select the title and save again.', 'shipment-tracking' ) ?>
                     </th>
                     <td>
                         <label for="NetGsm_UserName" class="label-bold">Subscriber No.</label> <br>
@@ -135,7 +135,7 @@ function shipment_tracking_sms_setting_page(){
 
                 <tr valign="top" class="Kobikom" <?php if( $sms_provider != 'Kobikom' ) echo 'style="display:none"'?>>
                     <th scope="row" style="width:25%">
-                        <?php _e( 'Your Kobikom Information <br> You need to enter your Kobikom API address.', 'kargoTR' ) ?>
+                        <?php _e( 'Your Kobikom Information <br> You need to enter your Kobikom API address.', 'shipment-tracking' ) ?>
                     </th>
                     <td>
                         <label for="Kobikom_ApiKey" class="label-bold">Your Kobikom API key</label> <br>
