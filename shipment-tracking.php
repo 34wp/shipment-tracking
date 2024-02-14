@@ -9,6 +9,11 @@
  * Domain Path: /languages
  */
 
+// If this file is called directly, abort.
+if ( ! defined( 'WPINC' ) ) {
+	die;
+}
+
 //Add Menu to WPadmin
 include 'netgsm-helper.php';
 include 'shipment-tracking-helper.php';
