@@ -1,8 +1,5 @@
 <?php
 
- 
- 
-
 //Create new api endpoint in WC API
 add_action( 'rest_api_init', function () {
     register_rest_route( 'wc/v3', '/kargo_takip', array(
@@ -61,9 +58,7 @@ function shipment_tracking_api_add_tracking_code() {
         return new WP_Error( 'rest_invalid_order_id', 'Invalid order id. Please check order id', array( 'status' => 401 ) );
     }
 
-
     //get order from order id
-
     $tracking_company_order = get_post_meta($order_id, 'tracking_company', true);
     $tracking_code_order = get_post_meta($order_id, 'tracking_code', true);
     $order_note = wc_get_order($order_id);
@@ -71,7 +66,6 @@ function shipment_tracking_api_add_tracking_code() {
     $sms_provider = get_option('sms_provider');
 
     //check if order has tracking code if has update 
-
     if ($tracking_company_order && $tracking_code_order) {
 
         update_post_meta($order_id, 'tracking_company', $shipment_company);

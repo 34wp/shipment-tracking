@@ -112,12 +112,12 @@ function shipment_tracking_setting_page() {
                     <td>
                         <input type="radio" id="evet" <?php if( $kargo_hazirlaniyor_text == 'yes' ) echo 'checked'?>
                             name="kargo_hazirlaniyor_text" value="yes">
-                        <label for="evet">Yes</label><br>
+                        <label for="evet"><?php _e('Yes', 'shipment-tracking' ) ?></label><br>
                     </td>
                     <td>
                         <input type="radio" id="hayir" <?php if( $kargo_hazirlaniyor_text == 'no' ) echo 'checked'?>
                             name="kargo_hazirlaniyor_text" value="no">
-                        <label for="hayir">No</label><br>
+                        <label for="hayir"><?php _e('No', 'shipment-tracking' ) ?></label><br>
                     </td>
                 </tr>
 
@@ -128,12 +128,12 @@ function shipment_tracking_setting_page() {
                     <td>
                         <input type="radio" id="evetmail" <?php if( $mail_send_general_option == 'yes' ) echo 'checked'?>
                             name="mail_send_general" value="yes">
-                        <label for="evetmail">Yes</label><br>
+                        <label for="evetmail"><?php _e('Yes', 'shipment-tracking' ) ?></label><br>
                     </td>
                     <td>
                         <input type="radio" id="hayirmail" <?php if( $mail_send_general_option == 'no' ) echo 'checked'?>
                             name="mail_send_general" value="no">
-                        <label for="hayirmail">No</label><br>
+                        <label for="hayirmail"><?php _e('No', 'shipment-tracking' ) ?></label><br>
                     </td>
                 </tr>
                 <tr>
@@ -155,12 +155,12 @@ function shipment_tracking_setting_page() {
                     <td>
                         <input type="radio" id="yes_url_send" <?php if( $NetGsm_sms_url_send == 'yes' ) echo 'checked'?>
                             name="NetGsm_sms_url_send" value="yes">
-                        <label for="yes_url_send">Yes</label><br>
+                        <label for="yes_url_send"><?php _e('Yes', 'shipment-tracking' ) ?></label><br>
                     </td>
                     <td>
                         <input type="radio" id="noUrlSend" <?php if( $NetGsm_sms_url_send == 'no' ) echo 'checked'?>
                             name="NetGsm_sms_url_send" value="no">
-                        <label for="noUrlSend">No</label><br>
+                        <label for="noUrlSend"><?php _e('No', 'shipment-tracking' ) ?></label><br>
                     </td>
                 </tr>
             </table>
@@ -313,8 +313,8 @@ function shipment_tracking_shipment_details($order) {
         else {
             ?>
 <div class="shipment-order-page">
-    <h2 id="kargoTakipSection">Shipment Tracking</h2>
-    <h4>Shipping company : </h4> <?php echo shipment_tracking_get_company_name($tracking_company); ?>
+    <h2 id="kargoTakipSection"><?php _e('Shipment Tracking', 'shipment-tracking' ) ?></h2>
+    <h4><?php _e('Shipping company', 'shipment-tracking' ) ?> : </h4> <?php echo shipment_tracking_get_company_name($tracking_company); ?>
     <h4><?php _e( 'Shipment tracking number:','shipment-tracking');?></h4> <?php echo esc_attr($tracking_code) ?>
     <br>
     <?php echo '<a href="' . shipment_tracking_getCargoTrack($tracking_company, $tracking_code) . '"target="_blank" rel="noopener noreferrer">'; _e( 'Click here for shipment tracking.','shipment-tracking' );  echo '</a>'; ?>
